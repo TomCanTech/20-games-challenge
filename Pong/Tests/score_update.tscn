@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bkorsnudp0g8r"]
+
+[ext_resource type="PackedScene" uid="uid://bevfrjng0tcc0" path="res://User Interface/Score/score.tscn" id="1_pfpj4"]
+[ext_resource type="PackedScene" uid="uid://cs2vxswcq3bsc" path="res://Level Space/Goal/goal.tscn" id="2_w5ekt"]
+[ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="3_dwerf"]
+[ext_resource type="PackedScene" uid="uid://7pdtsoqwcs6e" path="res://Moving Entities/Ball/ball.tscn" id="4_f52w6"]
+
+[node name="ScoreUpdate" type="Node2D" unique_id=371741851]
+
+[node name="Score" parent="." unique_id=2017788632 node_paths=PackedStringArray("goal") instance=ExtResource("1_pfpj4")]
+anchors_preset = 0
+offset_left = 472.0
+offset_top = 285.0
+offset_right = 538.0
+offset_bottom = 337.0
+goal = NodePath("../Goal")
+
+[node name="Goal" parent="." unique_id=1946687602 instance=ExtResource("2_w5ekt")]
+position = Vector2(1122, 321)
+
+[node name="Paddle" parent="." unique_id=37831422 instance=ExtResource("3_dwerf")]
+position = Vector2(983, 454)
+path_bounds = Array[Vector2]([Vector2(989, 321), Vector2(1110, 321)])
+
+[node name="Ball" parent="." unique_id=807750555 instance=ExtResource("4_f52w6")]
+position = Vector2(983, 191)
+direction = Vector2(1, 0)
