@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://csm6deatf6mi4"]
+
+[ext_resource type="PackedScene" uid="uid://7pdtsoqwcs6e" path="res://Moving Entities/Ball/ball.tscn" id="1_fpsa3"]
+[ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="2_h2v4m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_igaae"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xdik5"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1ox2e"]
+normal = Vector2(1, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fpsa3"]
+a = Vector2(0, -384)
+b = Vector2(0, 264)
+
+[node name="AiMovePaddle" type="Node2D" unique_id=773704378]
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=526391754]
+
+[node name="Floor" type="CollisionShape2D" parent="Boundaries" unique_id=159083272]
+position = Vector2(272, 648)
+shape = SubResource("WorldBoundaryShape2D_igaae")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Boundaries" unique_id=1837027594]
+position = Vector2(272, 0)
+shape = SubResource("WorldBoundaryShape2D_xdik5")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries" unique_id=584528838]
+position = Vector2(0, 264)
+shape = SubResource("WorldBoundaryShape2D_1ox2e")
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries" unique_id=1783126842]
+position = Vector2(472, 384)
+shape = SubResource("SegmentShape2D_fpsa3")
+
+[node name="Ball" parent="." unique_id=807750555 instance=ExtResource("1_fpsa3")]
+position = Vector2(152, 368)
+speed = 600.0
+
+[node name="Paddle" parent="." unique_id=37831422 node_paths=PackedStringArray("ball") instance=ExtResource("2_h2v4m")]
+position = Vector2(832, 157)
+player_num = 2
+path_bounds = Array[Vector2]([Vector2(832, 104), Vector2(832, 536)])
+ball = NodePath("../Ball")

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bpq3pj2oeom7q"]
+
+[ext_resource type="PackedScene" uid="uid://7pdtsoqwcs6e" path="res://Moving Entities/Ball/ball.tscn" id="1_apc6p"]
+[ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="2_8aiwa"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f7r6i"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fca06"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6gvwx"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vllgq"]
+normal = Vector2(-1, 0)
+
+[node name="QuickGame" type="Node2D" unique_id=301531861]
+
+[node name="Ball" parent="." unique_id=807750555 instance=ExtResource("1_apc6p")]
+position = Vector2(512, 320)
+speed = 600.0
+
+[node name="Paddle" parent="." unique_id=37831422 node_paths=PackedStringArray("ball") instance=ExtResource("2_8aiwa")]
+position = Vector2(832, 157)
+player_num = 2
+path_bounds = Array[Vector2]([Vector2(832, 104), Vector2(832, 536)])
+ball = NodePath("../Ball")
+
+[node name="Paddle2" parent="." unique_id=1192524817 node_paths=PackedStringArray("ball") instance=ExtResource("2_8aiwa")]
+position = Vector2(256, 128)
+player_num = 0
+path_bounds = Array[Vector2]([Vector2(256, 104), Vector2(256, 536)])
+ai_delay = 0.09
+ball = NodePath("../Ball")
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1545384431]
+
+[node name="Floor" type="CollisionShape2D" parent="Boundaries" unique_id=914941760]
+position = Vector2(536, 648)
+shape = SubResource("WorldBoundaryShape2D_f7r6i")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Boundaries" unique_id=1665987685]
+position = Vector2(536, 0)
+shape = SubResource("WorldBoundaryShape2D_fca06")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries" unique_id=1574610573]
+position = Vector2(0, 264)
+shape = SubResource("WorldBoundaryShape2D_6gvwx")
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries" unique_id=1505256852]
+position = Vector2(1152, 296)
+shape = SubResource("WorldBoundaryShape2D_vllgq")

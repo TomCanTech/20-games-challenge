@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cgikdsh57puke"]
+
+[ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="1_6dfs6"]
+
+[node name="PaddleMove" type="Node2D" unique_id=1941328903]
+
+[node name="Paddle" parent="." unique_id=37831422 instance=ExtResource("1_6dfs6")]
+position = Vector2(512, 536)
+player_num = 0
+path_bounds = Array[Vector2]([Vector2(512, 104), Vector2(512, 536)])
+
+[node name="Paddle2" parent="." unique_id=733011154 instance=ExtResource("1_6dfs6")]
+position = Vector2(768, 472)
+player_num = 1
+path_bounds = Array[Vector2]([Vector2(768, 104), Vector2(768, 536)])

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://muo2ph36xbp8"]
+
+[ext_resource type="PackedScene" uid="uid://7pdtsoqwcs6e" path="res://Moving Entities/Ball/ball.tscn" id="1_ffbvu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tbiqf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8uyju"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7o4gs"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dc57g"]
+normal = Vector2(-1, 0)
+
+[node name="BallCollision" type="Node2D" unique_id=2082045169]
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1859289442]
+
+[node name="Floor" type="CollisionShape2D" parent="Boundaries" unique_id=1956756382]
+position = Vector2(536, 648)
+shape = SubResource("WorldBoundaryShape2D_tbiqf")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Boundaries" unique_id=777802994]
+position = Vector2(536, 0)
+shape = SubResource("WorldBoundaryShape2D_8uyju")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries" unique_id=1480308585]
+position = Vector2(0, 264)
+shape = SubResource("WorldBoundaryShape2D_7o4gs")
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries" unique_id=723419741]
+position = Vector2(1152, 296)
+shape = SubResource("WorldBoundaryShape2D_dc57g")
+
+[node name="Ball" parent="." unique_id=807750555 instance=ExtResource("1_ffbvu")]
+position = Vector2(536, 304)
+speed = 600.0
