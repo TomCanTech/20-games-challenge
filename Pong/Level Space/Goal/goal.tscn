@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cs2vxswcq3bsc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q25yp"]
-size = Vector2(46, 637)
+size = Vector2(46, 648)
 
 [node name="Goal" type="Area2D" unique_id=1946687602]
 
