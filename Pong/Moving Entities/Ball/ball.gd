@@ -28,8 +28,12 @@ func _physics_process(delta: float) -> void:
 		return
 	else:
 		if (collision.get_collider() as Node).is_in_group("Paddles"):
+			$AudioStreamPlayer.volume_db = -20
+			$AudioStreamPlayer.play()
 			next_dir = _paddle_bounce(collision)
 		else:
+			$AudioStreamPlayer.volume_db = -25
+			$AudioStreamPlayer.play()
 			next_dir = _bounce(collision)
 	
 	direction = next_dir
@@ -51,3 +55,8 @@ func _paddle_bounce(collision: KinematicCollision2D) -> Vector2:
 	var colliding_body_pos = (collision.get_collider() as Paddle).get_position()
 	var angle_from_collider = (position - colliding_body_pos).angle()
 	return Vector2.from_angle(angle_from_collider).normalized()
+
+
+func reset() -> void:
+	position = initial_pos
+	direction = Vector2.from_angle(_generate_angle()).normalized()

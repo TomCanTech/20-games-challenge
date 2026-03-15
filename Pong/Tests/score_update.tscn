@@ -5,6 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="3_dwerf"]
 [ext_resource type="PackedScene" uid="uid://7pdtsoqwcs6e" path="res://Moving Entities/Ball/ball.tscn" id="4_f52w6"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f52w6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_k0e5a"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_slkk8"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yar7l"]
+normal = Vector2(-1, 0)
+
 [node name="ScoreUpdate" type="Node2D" unique_id=371741851]
 
 [node name="Score" parent="." unique_id=2017788632 node_paths=PackedStringArray("goal") instance=ExtResource("1_pfpj4")]
@@ -19,9 +30,27 @@ goal = NodePath("../Goal")
 position = Vector2(1122, 321)
 
 [node name="Paddle" parent="." unique_id=37831422 instance=ExtResource("3_dwerf")]
-position = Vector2(983, 454)
-path_bounds = Array[Vector2]([Vector2(989, 321), Vector2(1110, 321)])
+position = Vector2(1032, 335)
+path_bounds = Array[Vector2]([Vector2(1029, 110), Vector2(1029, 545)])
 
 [node name="Ball" parent="." unique_id=807750555 instance=ExtResource("4_f52w6")]
 position = Vector2(983, 191)
 direction = Vector2(1, 0)
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1780229125]
+
+[node name="Floor" type="CollisionShape2D" parent="Boundaries" unique_id=1028064327]
+position = Vector2(536, 648)
+shape = SubResource("WorldBoundaryShape2D_f52w6")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Boundaries" unique_id=1034068915]
+position = Vector2(536, 0)
+shape = SubResource("WorldBoundaryShape2D_k0e5a")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries" unique_id=1389482694]
+position = Vector2(0, 264)
+shape = SubResource("WorldBoundaryShape2D_slkk8")
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries" unique_id=1723226075]
+position = Vector2(1152, 296)
+shape = SubResource("WorldBoundaryShape2D_yar7l")

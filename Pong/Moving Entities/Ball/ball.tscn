@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://f0utvxt0fri5" path="res://icon.svg" id="1_psgt8"]
 [ext_resource type="Script" uid="uid://b4ppewknuicaj" path="res://Moving Entities/Ball/ball.gd" id="1_tq50h"]
+[ext_resource type="AudioStream" uid="uid://bw6xchvurek53" path="res://Moving Entities/Ball/07028058.wav" id="3_tvxma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq50h"]
 radius = 65.12296
 
-[node name="Ball" type="AnimatableBody2D" unique_id=807750555]
+[node name="Ball" type="AnimatableBody2D" unique_id=807750555 groups=["Ball"]]
 sync_to_physics = false
 script = ExtResource("1_tq50h")
 
@@ -18,3 +19,6 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=1348476885]
 scale = Vector2(1.025, 1.025)
 texture = ExtResource("1_psgt8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2095020424]
+stream = ExtResource("3_tvxma")

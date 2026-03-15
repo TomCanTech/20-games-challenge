@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://cs2vxswcq3bsc"]
 
+[ext_resource type="Script" uid="uid://daw63lvuum8rx" path="res://Level Space/Goal/goal.gd" id="1_cwij6"]
+[ext_resource type="AudioStream" uid="uid://c3odk5ynee2vu" path="res://Level Space/Goal/freesound_community-fanfare-46385.mp3" id="2_q25yp"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q25yp"]
 size = Vector2(46, 648)
 
 [node name="Goal" type="Area2D" unique_id=1946687602]
+script = ExtResource("1_cwij6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1930744988]
 shape = SubResource("RectangleShape2D_q25yp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1135842057]
+process_mode = 3
+stream = ExtResource("2_q25yp")
+volume_db = -20.07

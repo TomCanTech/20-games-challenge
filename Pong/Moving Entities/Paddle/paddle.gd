@@ -7,13 +7,20 @@ extends AnimatableBody2D
 
 @export var ai_delay: float = 0.08
 @export var ball: Ball
+@export var goals: Array[Goal]
 
 @onready var _path: Vector2 = (path_bounds[1] - path_bounds[0]).normalized()
+@onready var _centre_of_path: Vector2 = _path_centre()
 
 var _input_axis: float = 0
 
 
 func _ready() -> void:
+	for goal in goals:
+		goal.goal_entered.connect(_on_goal_entered)
+	
+	position = _centre_of_path
+	
 	if player_num == -1:
 		push_warning("The paddle number is not set. The behaviour of this paddle is undefined.")
 	if player_num > 2:
@@ -59,3 +66,19 @@ func _input_ai():
 		_input_axis = 1
 	elif ball_pos.y < (position.y - ($CollisionShape2D.shape.get_rect().size.y)/2):
 		_input_axis = -1
+
+
+func _path_centre() -> Vector2:
+	var path_sum = Vector2(0,0)
+	for path in path_bounds:
+		path_sum += path
+	var path_avg = path_sum / 2
+	return path_avg
+
+
+func _on_goal_entered() -> void:
+	reset()
+
+
+func reset() -> void:
+	position = _centre_of_path

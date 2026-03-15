@@ -2,8 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://bevfrjng0tcc0" path="res://User Interface/Score/score.tscn" id="2_sp40k"]
 [ext_resource type="PackedScene" uid="uid://cs2vxswcq3bsc" path="res://Level Space/Goal/goal.tscn" id="3_7q32h"]
+[ext_resource type="Theme" uid="uid://b8c7573tcyyga" path="res://score_theme.tres" id="3_brj4e"]
 
-[node name="Arena" type="Node2D" unique_id=2086678664]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sp40k"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_brj4e"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0g6uw"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7q32h"]
+normal = Vector2(-1, 0)
+
+[node name="Arena" type="Control" unique_id=188370692]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Goal" parent="." unique_id=1946687602 instance=ExtResource("3_7q32h")]
 position = Vector2(23, 324)
@@ -11,22 +29,62 @@ position = Vector2(23, 324)
 [node name="Goal2" parent="." unique_id=1474401441 instance=ExtResource("3_7q32h")]
 position = Vector2(1129, 324)
 
-[node name="Score" parent="." unique_id=1555774331 node_paths=PackedStringArray("goal") instance=ExtResource("2_sp40k")]
-anchors_preset = 0
-offset_left = 260.0
-offset_top = 297.0
-offset_right = 326.0
-offset_bottom = 349.0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-text = "1"
-goal = NodePath("../Goal2")
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1449715530]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Score2" parent="." unique_id=1135596063 node_paths=PackedStringArray("goal") instance=ExtResource("2_sp40k")]
-anchors_preset = 0
-offset_left = 696.0
-offset_top = 297.0
-offset_right = 762.0
-offset_bottom = 349.0
+[node name="ScoreMargin" type="MarginContainer" parent="HBoxContainer" unique_id=1000190880]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Score" parent="HBoxContainer/ScoreMargin" unique_id=1555774331 node_paths=PackedStringArray("goal") instance=ExtResource("2_sp40k")]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_brj4e")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+goal = NodePath("../../../Goal2")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=154119600]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+color = Color(0.29411766, 0.4392157, 1, 1)
+
+[node name="Score2Margin" type="MarginContainer" parent="HBoxContainer" unique_id=1847170848]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Score2" parent="HBoxContainer/Score2Margin" unique_id=1135596063 node_paths=PackedStringArray("goal") instance=ExtResource("2_sp40k")]
+layout_mode = 2
+theme = ExtResource("3_brj4e")
 text = "2"
-goal = NodePath("../Goal")
+horizontal_alignment = 1
+vertical_alignment = 1
+goal = NodePath("../../../Goal")
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=915936685]
+
+[node name="Floor" type="CollisionShape2D" parent="Boundaries" unique_id=641538443]
+position = Vector2(536, 648)
+shape = SubResource("WorldBoundaryShape2D_sp40k")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Boundaries" unique_id=2144230463]
+position = Vector2(536, 0)
+shape = SubResource("WorldBoundaryShape2D_brj4e")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries" unique_id=1282550004]
+position = Vector2(0, 264)
+shape = SubResource("WorldBoundaryShape2D_0g6uw")
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries" unique_id=2051697911]
+position = Vector2(1152, 296)
+shape = SubResource("WorldBoundaryShape2D_7q32h")
