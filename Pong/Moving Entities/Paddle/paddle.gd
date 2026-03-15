@@ -38,9 +38,10 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	move_and_collide(_path * _input_axis * delta * speed)
-	position.x = clampf(position.x, path_bounds[0].x, path_bounds[1].x)
-	position.y = clampf(position.y, path_bounds[0].y, path_bounds[1].y)
+	if _input_axis != 0:
+		move_and_collide(_path * _input_axis * delta * speed)
+		position.x = clampf(position.x, path_bounds[0].x, path_bounds[1].x)
+		position.y = clampf(position.y, path_bounds[0].y, path_bounds[1].y)
 
 
 func _input_ai():
