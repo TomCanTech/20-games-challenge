@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://y7p1cbvwyjtw"]
+
+[ext_resource type="Script" uid="uid://bxkffq37t5db0" path="res://User Interface/Menu/menu.gd" id="1_o8ymg"]
+[ext_resource type="Theme" uid="uid://damiowk4hu0sc" path="res://button_theme.tres" id="2_28f6f"]
+
+[node name="Menu" type="Control" unique_id=1314101324]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o8ymg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1357532264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3854925, 0.38549247, 0.38549247, 0.84313726)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=461343419]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 330
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 330
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=517280461]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1997551443]
+layout_mode = 2
+theme = ExtResource("2_28f6f")
+text = "Start Game"
+
+[node name="AIButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=357409568]
+layout_mode = 2
+theme = ExtResource("2_28f6f")
+text = "Disable Bot"
+
+[node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1108650067]
+layout_mode = 2
+theme = ExtResource("2_28f6f")
+text = "Reset"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=583557778]
+layout_mode = 2
+theme = ExtResource("2_28f6f")
+text = "Quit"

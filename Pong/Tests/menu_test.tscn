@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bd2xedssac45i"]
+
+[ext_resource type="PackedScene" uid="uid://y7p1cbvwyjtw" path="res://User Interface/Menu/menu.tscn" id="1_ikocc"]
+[ext_resource type="Texture2D" uid="uid://f0utvxt0fri5" path="res://icon.svg" id="2_jx8v7"]
+[ext_resource type="Script" uid="uid://bq51ob1ltb2ls" path="res://Tests/menu_test_sprite.gd" id="3_hts2f"]
+
+[node name="MenuTest" type="Control" unique_id=375180291]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" parent="." unique_id=1314101324 node_paths=PackedStringArray("node_array") instance=ExtResource("1_ikocc")]
+layout_mode = 1
+node_array = [NodePath("../Sprite2D")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2116986084]
+position = Vector2(234, 207)
+texture = ExtResource("2_jx8v7")
+script = ExtResource("3_hts2f")
