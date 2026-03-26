@@ -1,7 +1,13 @@
 class_name Paddle
 extends AnimatableBody2D
 
-@export var player_num: int = -1
+enum Player {
+	PLAYER_1,
+	PLAYER_2,
+	AI,
+	}
+
+@export var player_num: Player = Player.PLAYER_1
 @export var speed: float = 500
 @export var path_bounds: Array[Vector2]
 
@@ -9,36 +15,33 @@ extends AnimatableBody2D
 @export var ball: Ball
 @export var goals: Array[Goal]
 
+var _input_axis: float = 0
+
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var _path: Vector2 = (path_bounds[1] - path_bounds[0]).normalized()
 @onready var _centre_of_path: Vector2 = _path_centre()
 
-var _input_axis: float = 0
-
 
 func _ready() -> void:
-	for goal in goals:
-		goal.goal_entered.connect(_on_goal_entered)
-	
-	position = _centre_of_path
-	
-	if player_num == -1:
-		push_warning("The paddle number is not set. The behaviour of this paddle is undefined.")
 	if player_num > 2:
-		push_warning("Behaviour is undefined for more than 3 paddles.")
+		push_warning("Behaviour is undefined for more than 3 types of player input.")
+	
 	if path_bounds.size() != 2:
-		if path_bounds.size() < 2:
-			push_warning("The path bounds are not set. This paddle will not be able to move upon receiving input.")
-		if path_bounds.size() > 2:
-			push_warning("Too many path bounds have been set. This paddle may only use the first two path bounds.")
+		push_warning("The path must be a straight line defined by exactly 2 bounds.")
+	
+	for goal in goals:
+		goal.goal_entered.connect(reset)
+		
+	position = _centre_of_path
 
 
 func _process(_delta: float) -> void:
 	match player_num:
-		0:
+		Player.PLAYER_1:
 			_input_axis = Input.get_axis("player_one_up", "player_one_down")
-		1:
+		Player.PLAYER_2:
 			_input_axis = Input.get_axis("player_two_up", "player_two_down")
-		2:
+		Player.AI:
 			_input_ai()
 		_:
 			_input_axis = Input.get_axis("player_one_up", "player_one_down")
@@ -47,37 +50,28 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if _input_axis != 0:
 		move_and_collide(_path * _input_axis * delta * speed)
-		position.x = clampf(position.x, path_bounds[0].x, path_bounds[1].x)
-		position.y = clampf(position.y, path_bounds[0].y, path_bounds[1].y)
-
-
-func _input_ai():
-	var ball_pos: Vector2 = ball.position
-	var x_offset: float = 30
-	
-	if ball_pos.x > (position.x - x_offset) and ball_pos.x < (position.x + x_offset):
-		_input_axis = 0
-		return
-	
-	await get_tree().create_timer(ai_delay).timeout
-	if is_equal_approx(ball_pos.y, position.y):
-		_input_axis = 0
-	elif ball_pos.y > (position.y + ($CollisionShape2D.shape.get_rect().size.y)/2):
-		_input_axis = 1
-	elif ball_pos.y < (position.y - ($CollisionShape2D.shape.get_rect().size.y)/2):
-		_input_axis = -1
+		position = position.clamp(path_bounds[0], path_bounds[1])
 
 
 func _path_centre() -> Vector2:
 	var path_sum = Vector2(0,0)
 	for path in path_bounds:
 		path_sum += path
-	var path_avg = path_sum / 2
+	var path_avg = path_sum / path_bounds.size()
 	return path_avg
 
 
-func _on_goal_entered() -> void:
-	reset()
+func _input_ai():
+	var ball_pos: Vector2 = ball.position
+	var paddle_y_size = collision_shape_2d.shape.get_rect().size.y
+	
+	await get_tree().create_timer(ai_delay).timeout
+	if is_equal_approx(ball_pos.y, position.y):
+		_input_axis = 0
+	elif ball_pos.y > (position.y + paddle_y_size/2):
+		_input_axis = 1
+	elif ball_pos.y < (position.y - paddle_y_size/2):
+		_input_axis = -1
 
 
 func reset() -> void:

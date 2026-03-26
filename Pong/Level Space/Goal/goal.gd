@@ -1,19 +1,22 @@
 extends Area2D
 class_name Goal
 
-signal goal_entered()
+signal goal_entered
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(on_goal_entered)
 
 
 func on_goal_entered(body: Node2D):
-	if !body.is_in_group("Ball"): return
+	if !body.is_in_group("Ball"): 
+		return
 	
 	goal_entered.emit()
-	$AudioStreamPlayer.play()
+	audio_stream_player.play()
+	
 	if body.has_method("reset"):
 		body.reset()
 		get_tree().paused = true

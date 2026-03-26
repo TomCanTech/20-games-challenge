@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjklg5rm144c5"]
 
-[ext_resource type="Script" uid="uid://c80ovexcu8nye" path="res://Level/level.gd" id="1_iincs"]
+[ext_resource type="Script" uid="uid://chfj46sjgm02s" path="res://Level/level.gd" id="1_iincs"]
 [ext_resource type="PackedScene" uid="uid://cqfp0v21bg6vw" path="res://Level Space/Arena/Arena.tscn" id="1_qmtf6"]
 [ext_resource type="PackedScene" uid="uid://kii6wqv3olp" path="res://Moving Entities/Paddle/paddle.tscn" id="2_52x1o"]
 [ext_resource type="PackedScene" uid="uid://y7p1cbvwyjtw" path="res://User Interface/Menu/menu.tscn" id="2_uawph"]
@@ -20,7 +20,6 @@ layout_mode = 1
 
 [node name="Paddle" parent="." unique_id=37831422 node_paths=PackedStringArray("goals") instance=ExtResource("2_52x1o")]
 position = Vector2(110, 521)
-player_num = 0
 path_bounds = Array[Vector2]([Vector2(110, 128), Vector2(110, 520)])
 goals = [NodePath("../Arena/Goal"), NodePath("../Arena/Goal2")]
 
@@ -28,11 +27,13 @@ goals = [NodePath("../Arena/Goal"), NodePath("../Arena/Goal2")]
 position = Vector2(1042, 142)
 player_num = 2
 path_bounds = Array[Vector2]([Vector2(1042, 128), Vector2(1042, 520)])
+ai_delay = 0.18
 ball = NodePath("../Ball")
 goals = [NodePath("../Arena/Goal"), NodePath("../Arena/Goal2")]
 
 [node name="Ball" parent="." unique_id=807750555 instance=ExtResource("3_iincs")]
 position = Vector2(576, 324)
+speed = 600.0
 
 [node name="Menu" parent="." unique_id=1314101324 node_paths=PackedStringArray("node_array", "ai_paddle") instance=ExtResource("2_uawph")]
 process_mode = 3
