@@ -28,7 +28,6 @@ ball = NodePath("../Ball")
 
 [node name="Paddle2" parent="." unique_id=1192524817 node_paths=PackedStringArray("ball") instance=ExtResource("2_8aiwa")]
 position = Vector2(256, 128)
-player_num = 0
 path_bounds = Array[Vector2]([Vector2(256, 104), Vector2(256, 536)])
 ai_delay = 0.09
 ball = NodePath("../Ball")

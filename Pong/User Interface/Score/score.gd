@@ -17,4 +17,5 @@ func _update_score() -> void:
 
 
 func reset() -> void:
-	text = str(0)
+	score = 0
+	text = str(score)
